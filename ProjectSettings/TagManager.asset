@@ -39,8 +39,29 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Back
+    uniqueID: 4045384673
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Touch
+    uniqueID: 2064785681
+    locked: 0
+  - name: Sight
+    uniqueID: 3023427163
+    locked: 0
+  - name: Smell
+    uniqueID: 1463719451
+    locked: 0
+  - name: Hear
+    uniqueID: 2655665229
+    locked: 0
+  - name: Taste
+    uniqueID: 2924449199
+    locked: 0
+  - name: Always
+    uniqueID: 1846186907
     locked: 0
   - name: UI
     uniqueID: 1426631963

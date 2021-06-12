@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3879460699022943239}
   - component: {fileID: 3879460699022943244}
   - component: {fileID: 3879460699022943235}
+  - component: {fileID: 6347555642427575528}
   m_Layer: 0
   m_Name: MCPlaceholder
   m_TagString: Untagged
@@ -170,6 +171,14 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!81 &6347555642427575528
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3879460699022943238}
+  m_Enabled: 1
 --- !u!1 &3879460699609980205
 GameObject:
   m_ObjectHideFlags: 0

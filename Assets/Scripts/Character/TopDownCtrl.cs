@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum PlayerStates
 {
@@ -14,6 +15,7 @@ public enum PlayerStates
 public class TopDownCtrl : MonoBehaviour
 {
     private PlayerStates state = PlayerStates.FINE;
+    private GameLayer headLayer = GameLayer.NONE;
     private Rigidbody2D myRigidbody = null;
     private Animator myAnimator = null;
     private SpriteRenderer mySpriteRenderer = null;
@@ -54,9 +56,60 @@ public class TopDownCtrl : MonoBehaviour
 					break;
                 case PlayerStates.DEAD:
                     playerFeedback.Play("Dead");
+                    HeadLayer = GameLayer.NONE;
 					break;
                 case PlayerStates.CUTSCENE:
 				case PlayerStates.COUNT:
+				default:
+					break;
+			}
+		}
+	}
+
+    public GameLayer HeadLayer
+	{
+        get { return headLayer; }
+		set
+		{
+            headLayer = value;
+			switch (headLayer)
+			{
+				case GameLayer.TOUCH:
+				case GameLayer.HEAR:
+				case GameLayer.SIGHT:
+                    LayerObject[] layerObjects = FindObjectsOfType<LayerObject>();
+                    currentHp = maxHp;
+                    playerFeedback.GetComponent<Image>().enabled = true;
+                    if(pertubatorsRef.Count != 0)
+					{
+                        State = PlayerStates.PANICKED;
+					}
+                    else
+					{
+                        State = PlayerStates.FINE;
+                    }
+                    foreach (LayerObject current in layerObjects)
+                    {
+                        if(current.currentLayer == headLayer)
+						{
+                            current.ActiveLayerObject();
+						}
+                        else
+						{
+                            current.DeactiveLayerObject();
+                        }
+                    }
+                    break;
+				case GameLayer.NONE:
+                    LayerObject[] gatheredObjects = FindObjectsOfType<LayerObject>();
+                    foreach (LayerObject actual in gatheredObjects)
+                    {
+                        actual.DeactiveLayerObject();
+                    }
+                    playerFeedback.GetComponent<Image>().enabled = false;
+                    break;
+				case GameLayer.SMELL:
+				case GameLayer.TASTE:
 				default:
 					break;
 			}
@@ -115,7 +168,7 @@ public class TopDownCtrl : MonoBehaviour
 
     void Update()
     {
-        if (state == PlayerStates.DEAD || state == PlayerStates.CUTSCENE)
+        if (state == PlayerStates.CUTSCENE)
             return;
 
         //CONTROLS
@@ -170,6 +223,20 @@ public class TopDownCtrl : MonoBehaviour
 		{
             currentHp = Mathf.Clamp(currentHp + healRate * Time.deltaTime,0,maxHp);
 		}
+
+        //DEBUG
+        if(Input.GetKeyDown(KeyCode.Keypad0))
+		{
+            HeadLayer = GameLayer.HEAR;
+		}
+        else if(Input.GetKeyDown(KeyCode.Keypad1))
+		{
+            HeadLayer = GameLayer.SIGHT;
+        }
+        else if(Input.GetKeyDown(KeyCode.Keypad2))
+		{
+            HeadLayer = GameLayer.TOUCH;
+        }
     }
 
     public void AddPertubator(Perturbator inPertubator)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum GameLayer
 {
@@ -15,7 +16,9 @@ public enum GameLayer
 public class LayerObject : MonoBehaviour
 {
 	public GameLayer currentLayer = GameLayer.TOUCH;
+	public UnityEvent OnLayerActivated, OnLayerDeactivated;
 	bool active = false;
+
 
 	public void ActiveLayerObject()
 	{
@@ -23,6 +26,7 @@ public class LayerObject : MonoBehaviour
 		{
 			active = true;
 			Debug.Log(gameObject.name + " just activated");
+			OnLayerActivated?.Invoke();
 		}
 	}
 
@@ -32,6 +36,7 @@ public class LayerObject : MonoBehaviour
 		{
 			active = false;
 			Debug.Log(gameObject.name + " just deactivated");
+			OnLayerDeactivated?.Invoke();
 		}
 	}
 }

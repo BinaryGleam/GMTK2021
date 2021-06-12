@@ -1,18 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TopDownCtrl : MonoBehaviour
 {
-    Rigidbody2D myRigidbody = null;
-    Animator myAnimator = null;
-    SpriteRenderer mySpriteRenderer = null;
-    SpriteRenderer myChildSpriteRenderer = null;
+    private Rigidbody2D myRigidbody = null;
+    private Animator myAnimator = null;
+    private SpriteRenderer mySpriteRenderer = null;
+    private SpriteRenderer myChildSpriteRenderer = null;
+
+    private bool[] activeLayers = new bool[(int)GameLayer.NONE];
+    private Perturbator[] pertubatorsRef;
+
+    [SerializeField]
+    private Image playerFeedback = null;
 
     public float speed = 1f;
+    public float maxHp = 100;
+    public float currentHp;
 
+    public bool[] ActiveLayers
+    {
+        get
+		{
+            return activeLayers;
+		}
 
-    void Start()
+        set
+		{
+            int i = 0;
+            LayerObject[] layerObjects = FindObjectsOfType<LayerObject>();
+
+            foreach (bool current in value)
+			{
+                activeLayers[i] = current;
+
+                i++;
+			}
+
+            foreach(LayerObject currentObject in layerObjects)
+			{
+                if(activeLayers[(int)currentObject.currentLayer] == true)
+				{
+                    currentObject.ActiveLayerObject();
+				}
+                else
+				{
+                    currentObject.DeactiveLayerObject();
+                }
+            }
+		}
+	}
+
+	private void Awake()
+	{
+        currentHp = maxHp;
+
+        for (int i = 0; i < activeLayers.Length; i++)
+            activeLayers[i] = false;
+	}
+
+	void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();

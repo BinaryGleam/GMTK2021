@@ -1,24 +1,67 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
+public enum PlayerStates
+{
+    FINE = 0,
+    PANICKED,
+    DEAD,
+    CUTSCENE,
+    COUNT
+}
 
 public class TopDownCtrl : MonoBehaviour
 {
+    private PlayerStates state = PlayerStates.FINE;
     private Rigidbody2D myRigidbody = null;
     private Animator myAnimator = null;
     private SpriteRenderer mySpriteRenderer = null;
     private SpriteRenderer myChildSpriteRenderer = null;
 
     private bool[] activeLayers = new bool[(int)GameLayer.NONE];
-    private Perturbator[] pertubatorsRef;
+    private List<Perturbator> pertubatorsRef = new List<Perturbator>();
 
     [SerializeField]
-    private Image playerFeedback = null;
+    private Animator playerFeedback = null;
 
+    [Header("Locomotion stuff")]
     public float speed = 1f;
+
+    [Header("Health stuff")]
     public float maxHp = 100;
-    public float currentHp;
+    private float currentHp;
+    [Tooltip("Dmg lost per sec")]
+    public float dmgRate = 50;
+    [Tooltip("Dmg recovered per sec")]
+    public float healRate = 10;
+
+
+    public PlayerStates State
+	{
+        get { return state; }
+        set
+		{
+            state = value;
+
+			switch (state)
+			{
+				case PlayerStates.FINE:
+                    playerFeedback.Play("Normal");
+					break;
+				case PlayerStates.PANICKED:
+                    playerFeedback.Play("Panick");
+					break;
+                case PlayerStates.DEAD:
+                    playerFeedback.Play("Dead");
+					break;
+                case PlayerStates.CUTSCENE:
+				case PlayerStates.COUNT:
+				default:
+					break;
+			}
+		}
+	}
 
     public bool[] ActiveLayers
     {
@@ -69,12 +112,16 @@ public class TopDownCtrl : MonoBehaviour
         myChildSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
+
     void Update()
     {
+        if (state == PlayerStates.DEAD || state == PlayerStates.CUTSCENE)
+            return;
+
+        //CONTROLS
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        //Idle
         if (horizontal == 0f && vertical == 0f)
 		{
             mySpriteRenderer.flipX = false;
@@ -107,5 +154,49 @@ public class TopDownCtrl : MonoBehaviour
         }
 
         myRigidbody.velocity = new Vector2(horizontal, vertical).normalized * speed;
+
+        //STATE
+        if(pertubatorsRef.Count != 0)
+		{
+            currentHp -= dmgRate * Time.deltaTime;
+
+            if(currentHp <= 0)
+			{
+                transform.GetChild(0).gameObject.SetActive(false);
+                State = PlayerStates.DEAD;
+            }
+        }
+        else
+		{
+            currentHp = Mathf.Clamp(currentHp + healRate * Time.deltaTime,0,maxHp);
+		}
+    }
+
+    public void AddPertubator(Perturbator inPertubator)
+	{
+        foreach(Perturbator perb in pertubatorsRef)
+		{
+            if(perb == inPertubator)
+			{
+                return;
+			}
+		}
+        pertubatorsRef.Add(inPertubator);
+        State = PlayerStates.PANICKED;
+	}
+
+    public void RemovePertubator(Perturbator inPertubator)
+    {
+        for(int i = 0; i<pertubatorsRef.Count; i++)
+		{
+            if(inPertubator == pertubatorsRef[i])
+			{
+                pertubatorsRef.RemoveAt(i);
+			}
+		}
+        if(pertubatorsRef.Count == 0)
+		{
+            State = PlayerStates.FINE;
+        }
     }
 }

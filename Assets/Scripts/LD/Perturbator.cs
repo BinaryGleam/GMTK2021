@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class Perturbator : LayerObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	//private void OnBecameVisible()
+	//{
+	//	FindObjectOfType<TopDownCtrl>().AddPertubator(this);
+	//}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	//private void OnBecameInvisible()
+	//{
+	//	FindObjectOfType<TopDownCtrl>().RemovePertubator(this);
+
+	//}
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+		//TopDownCtrl player = collision.GetComponent<TopDownCtrl>();
+		//if (player)
+		//{
+		//	player.AddPertubator(this);
+		//}
+
+		if (collision.tag == "PertubatorDetector")
+		{
+			FindObjectOfType<TopDownCtrl>().AddPertubator(this);
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+		if (collision.tag == "PertubatorDetector")
+		{
+			FindObjectOfType<TopDownCtrl>().RemovePertubator(this);
+		}
+	}
 }

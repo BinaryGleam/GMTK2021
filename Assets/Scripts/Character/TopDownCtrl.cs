@@ -23,6 +23,7 @@ public class TopDownCtrl : MonoBehaviour
 
     private bool[] activeLayers = new bool[(int)GameLayer.NONE];
     private List<Perturbator> pertubatorsRef = new List<Perturbator>();
+    private Head headRef = null;
 
     [SerializeField]
     private Animator playerFeedback = null;
@@ -104,7 +105,14 @@ public class TopDownCtrl : MonoBehaviour
                     LayerObject[] gatheredObjects = FindObjectsOfType<LayerObject>();
                     foreach (LayerObject actual in gatheredObjects)
                     {
-                        actual.DeactiveLayerObject();
+                        if (actual.currentLayer == headLayer)
+                        {
+                            actual.ActiveLayerObject();
+                        }
+                        else
+                        {
+                            actual.DeactiveLayerObject();
+                        }
                     }
                     playerFeedback.GetComponent<Image>().enabled = false;
                     break;
@@ -224,8 +232,28 @@ public class TopDownCtrl : MonoBehaviour
             currentHp = Mathf.Clamp(currentHp + healRate * Time.deltaTime,0,maxHp);
 		}
 
+        //HEAD
+        if(headRef != null && Input.GetKeyDown(KeyCode.E))
+		{
+            HeadLayer = headRef.headLayer;
+            myAnimator.runtimeAnimatorController = headRef.playerController;
+            playerFeedback.runtimeAnimatorController = headRef.feedbackController;
+            transform.GetChild(0).gameObject.SetActive(true);
+            currentHp = maxHp;
+            Head[] otherHeads = FindObjectsOfType<Head>();
+            foreach(Head singleHead in otherHeads)
+			{
+                singleHead.GetComponent<SpriteRenderer>().enabled = true;
+                singleHead.GetComponent<Collider2D>().enabled = true;
+            }
+            headRef.GetComponent<SpriteRenderer>().enabled = false;
+            headRef.GetComponent<Collider2D>().enabled = false;
+        }
+
+
+
         //DEBUG
-        if(Input.GetKeyDown(KeyCode.Keypad0))
+        if (Input.GetKeyDown(KeyCode.Keypad0))
 		{
             HeadLayer = GameLayer.HEAR;
 		}
@@ -237,6 +265,27 @@ public class TopDownCtrl : MonoBehaviour
 		{
             HeadLayer = GameLayer.TOUCH;
         }
+    }
+
+	private void OnTriggerEnter2D(Collider2D collision)
+	{
+        Head possibleHead = collision.GetComponent<Head>();
+
+        if(possibleHead != null)
+		{
+            headRef = possibleHead;
+		}
+	}
+
+	private void OnTriggerExit2D(Collider2D collision)
+	{
+        Head possibleHead = collision.GetComponent<Head>();
+
+        if (possibleHead != null)
+        {
+            headRef = null;
+        }
+
     }
 
     public void AddPertubator(Perturbator inPertubator)

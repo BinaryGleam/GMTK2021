@@ -37,7 +37,7 @@ public class CompassSystem : MonoBehaviour
 		{
 			foreach(CompassDir currentNeedle in needles)
 			{
-				if(Vector2.Dot(currentNeedle.Dir,contactDirection) >= angleAcceptance)
+				if(Vector2.Dot(currentNeedle.Dir.normalized,contactDirection.normalized) >= angleAcceptance)
 				{
 					currentNeedle.GO.SetActive(true);
 				}

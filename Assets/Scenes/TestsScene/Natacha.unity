@@ -1839,10 +1839,6 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: 1426631963
       objectReference: {fileID: 0}
-    - target: {fileID: 3294694748796968697, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Radius
-      value: 1.16
-      objectReference: {fileID: 0}
     - target: {fileID: 3410874849983124430, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
       propertyPath: m_Name
       value: CharacterPack
@@ -1952,22 +1948,6 @@ PrefabInstance:
       value: -3.1160975
       objectReference: {fileID: 0}
     - target: {fileID: 3410874850728583086, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Size.x
-      value: 0.41263843
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583086, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Size.y
-      value: 0.61833596
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583086, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.014432311
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583086, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Offset.y
-      value: 0.09870684
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583086, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 0.31
       objectReference: {fileID: 0}
@@ -1990,22 +1970,6 @@ PrefabInstance:
     - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
       propertyPath: m_Size.y
       value: 0.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: b077fa0fa9aa5a54f8050ece24ff5d3a, type: 3}
-    - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_Color.r
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3410874850728583087, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
       propertyPath: m_WasSpriteAssigned

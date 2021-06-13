@@ -27,6 +27,8 @@ public class TopDownCtrl : MonoBehaviour
 
     [SerializeField]
     private Animator playerFeedback = null;
+    [SerializeField]
+    private CompassSystem myCompass = null;
 
     [Header("Locomotion stuff")]
     public float speed = 1f;
@@ -285,6 +287,23 @@ public class TopDownCtrl : MonoBehaviour
         {
             headRef = null;
         }
+
+    }
+
+	private void OnCollisionStay2D(Collision2D collision)
+	{
+        Vector3 colPoint = collision.collider.ClosestPoint(transform.position);
+        Vector3 colDir = colPoint - transform.position;
+        Vector2 colDir2D = colDir;
+
+        Debug.DrawLine(transform.position, transform.position + colDir,Color.magenta);
+
+        myCompass.LoadDirection(colDir2D);
+	}
+
+	private void OnCollisionExit2D(Collision2D collision)
+	{
+        myCompass.LoadDirection(Vector2.zero);
 
     }
 

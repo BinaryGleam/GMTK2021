@@ -1247,14 +1247,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3410874849398124543, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 16.50003
-      objectReference: {fileID: 0}
-    - target: {fileID: 3410874849398124543, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -5.1150208
-      objectReference: {fileID: 0}
     - target: {fileID: 3410874849983124430, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
       propertyPath: m_Name
       value: CharacterPack
@@ -1303,13 +1295,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3410874850189285999, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.506341
+    - target: {fileID: 5092107579821094209, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
+      propertyPath: needles.Array.data[0].Dir.y
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3410874850943820390, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.506341
+    - target: {fileID: 5092107579821094209, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
+      propertyPath: needles.Array.data[1].Dir.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092107579821094209, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
+      propertyPath: needles.Array.data[2].Dir.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092107579821094209, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}
+      propertyPath: needles.Array.data[3].Dir.x
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bacc8b638533274eb7887ff0434fd2c, type: 3}

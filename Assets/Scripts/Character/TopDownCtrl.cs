@@ -172,7 +172,7 @@ public class TopDownCtrl : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySpriteRenderer = GetComponent<SpriteRenderer>();
-        myChildSpriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        myChildSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
 

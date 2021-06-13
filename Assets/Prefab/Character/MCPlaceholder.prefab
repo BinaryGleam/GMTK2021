@@ -220,6 +220,7 @@ MonoBehaviour:
     Dir: {x: 0, y: -1}
   - GO: {fileID: 1220764830265773575}
     Dir: {x: -1, y: 0}
+  angleAcceptance: 0.33
 --- !u!1 &3879460699022943238
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +240,7 @@ GameObject:
   - component: {fileID: 7465372079373976443}
   m_Layer: 0
   m_Name: MCPlaceholder
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

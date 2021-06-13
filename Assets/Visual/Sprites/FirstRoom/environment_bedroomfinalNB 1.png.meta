@@ -1,28 +1,7 @@
 fileFormatVersion: 2
-guid: b8733404f66c14c49ac9b85b725e0c54
+guid: f7aa3e24dcc23684a9e069cc226c0221
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: 8066815700417745043
-    second: bedroooom_meubles_0
-  - first:
-      213: 4682843879039133531
-    second: bedroooom_meubles_1
-  - first:
-      213: -6760332777841171578
-    second: bedroooom_meubles_2
-  - first:
-      213: -8281034398277204476
-    second: bedroooom_meubles_3
-  - first:
-      213: -3280753245716040808
-    second: bedroooom_meubles_4
-  - first:
-      213: -7487293273513829976
-    second: bedroooom_meubles_5
-  - first:
-      213: 8640318493590348377
-    second: bedroooom_meubles_6
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
